@@ -4,35 +4,38 @@ module.exports = {
     {
       method: "shell.run",
       params: {
+        conda: "node18",
         message: [
-          "git clone https://github.com/a16z-infra/ai-town.git app",
+          "git clone https://github.com/peanutcocktail/ai-town.git app",
         ]
       }
     },
-    // Delete this step if your project does not use torch
-    {
-      method: "script.start",
-      params: {
-        uri: "torch.js",
-        params: {
-          venv: "env",                // Edit this to customize the venv folder path
-          path: "app",                // Edit this to customize the path to start the shell from
-          // xformers: true   // uncomment this line if your project requires xformers
-        }
-      }
-    },
-    // Edit this step with your custom install commands
     {
       method: "shell.run",
       params: {
-        venv: "env",                // Edit this to customize the venv folder path
+//        venv: "env",                // Edit this to customize the venv folder path
         path: "app",                // Edit this to customize the path to start the shell from
         message: [
-          "pip install gradio devicetorch",
-          "pip install -r requirements.txt"
+          "conda install -y -c conda-forge nodejs==18.19.0 just rust",
+          "node -v",
+          "npm install",
         ]
       }
     },
+//    {
+//      method: "fs.download",
+//      params: {
+//        uri: "https://github.com/get-convex/convex-backend/releases/download/precompiled-2024-04-26-560e5a3/convex-local-backend-aarch64-apple-darwin.zip",
+//        dir: "app"
+//      }
+//    },
+//    {
+//      method: "shell.run",
+//      params: {
+//        message: "unzip convex-local-backend-aarch64-apple-darwin.zip",
+//        path: "app"
+//      }
+//    },
     //  Uncomment this step to add automatic venv deduplication (Experimental)
     //  {
     //    method: "fs.link",

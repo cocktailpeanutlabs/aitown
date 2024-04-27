@@ -4,17 +4,41 @@ module.exports = {
     {
       method: "shell.run",
       params: {
-        venv: "env",                // Edit this to customize the venv folder path
-        env: { },                   // Edit this to customize environment variables (see documentation)
+        conda: "node18",
+//        venv: "env",                // Edit this to customize the venv folder path
+        env: {
+          //OLLAMA_MODEL: "llama3:instruct",
+          // RUST_BACKTRACE: "1",
+          RUST_LOG: "warn"
+        },                   // Edit this to customize environment variables (see documentation)
         path: "app",                // Edit this to customize the path to start the shell from
         message: [
-          "python app.py",    // Edit with your custom commands
+          //"./convex-local-backend"
+          "just convex dev"
         ],
         on: [{
           // The regular expression pattern to monitor.
           // When this pattern occurs in the shell terminal, the shell will return,
           // and the script will go onto the next step.
-          "event": "/http:\/\/\\S+/",   
+          //"event": "/http:\/\/\\S+:3210/",   
+          "event": "/Running/",
+
+          // "done": true will move to the next step while keeping the shell alive.
+          // "kill": true will move to the next step after killing the shell.
+          "done": true
+        }]
+      }
+    },
+    {
+      method: "shell.run",
+      params: {
+        message: "npm run dev",
+        path: "app",
+        on: [{
+          // The regular expression pattern to monitor.
+          // When this pattern occurs in the shell terminal, the shell will return,
+          // and the script will go onto the next step.
+          "event": "/http:\/\/\\S+ai-town/",   
 
           // "done": true will move to the next step while keeping the shell alive.
           // "kill": true will move to the next step after killing the shell.
