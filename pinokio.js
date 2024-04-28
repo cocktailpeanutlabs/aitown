@@ -40,6 +40,10 @@ module.exports = {
           text: "Start",
           href: "start.js",
         }, {
+          icon: 'fa-solid fa-bomb',
+          text: "Explode and Start Over",
+          href: "explode.js",
+        }, {
           icon: "fa-solid fa-plug",
           text: "Update",
           href: "update.js",
@@ -47,13 +51,6 @@ module.exports = {
           icon: "fa-solid fa-plug",
           text: "Install",
           href: "install.js",
-        }, {
-          icon: 'fa-solid fa-bomb',
-          text: "Start the World Over",
-          href: "run.js",
-          params: {
-            cmd: "just convex init"
-          }
         }, {
           icon: "fa-regular fa-circle-xmark",
           text: "Reset",
