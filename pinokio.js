@@ -37,7 +37,7 @@ module.exports = {
             icon: 'fa-solid fa-terminal',
             text: "Terminal",
             href: "start.js",
-          }].concat(db_menu)
+          }].concat(db_exists ? db_menu : [])
         } else {
           return [{
             icon: 'fa-solid fa-terminal',
@@ -50,7 +50,7 @@ module.exports = {
           icon: "fa-solid fa-power-off",
           text: "Start",
           href: "start.js",
-        }].concat(db_menu).concat([{
+        }].concat((db_exists ? db_menu : [])).concat([{
           icon: "fa-solid fa-plug",
           text: "Update",
           href: "update.js",
