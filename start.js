@@ -2,6 +2,17 @@ module.exports = {
   daemon: true,
   run: [
     {
+      "method": "modal",
+      "params": {
+        "title": "Ollama",
+        "description": "Launch Ollama before proceeding.",
+        "menu": [{
+          "text": "Install Ollama",
+          "href": "https://ollama.com/"
+        }]
+      }
+    },
+    {
       method: "shell.run",
       params: {
         conda: "node18",
