@@ -41,8 +41,13 @@ module.exports = {
           href: "start.js",
         }, {
           icon: 'fa-solid fa-bomb',
-          text: "Explode and Start Over",
+          text: "Reset DB",
           href: "explode.js",
+        }, {
+          icon: 'fa-solid fa-database",
+          text: "Download World DB",
+          href: "app/convex_local_backend.sqlite3"
+          popout: true,
         }, {
           icon: "fa-solid fa-plug",
           text: "Update",
@@ -53,7 +58,7 @@ module.exports = {
           href: "install.js",
         }, {
           icon: "fa-regular fa-circle-xmark",
-          text: "Reset",
+          text: "Reset Project",
           href: "reset.js",
         }]
       }
