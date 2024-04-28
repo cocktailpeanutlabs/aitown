@@ -5,16 +5,19 @@ module.exports = {
       method: "shell.run",
       params: {
         conda: "node18",
-//        venv: "env",                // Edit this to customize the venv folder path
         env: {
-          //OLLAMA_MODEL: "llama3:instruct",
+          //LLM_MODEL: "llama3",
+          //RUST_LOG: "info"
           // RUST_BACKTRACE: "1",
+          //RUST_LOG: "debug",
           RUST_LOG: "warn"
         },                   // Edit this to customize environment variables (see documentation)
         path: "app",                // Edit this to customize the path to start the shell from
         message: [
-          //"./convex-local-backend"
-          "just convex dev"
+          "ollama pull llama3",
+          "./convex-local-backend"
+          //"just convex dev"
+          ////"just run-local-backend"
         ],
         on: [{
           // The regular expression pattern to monitor.
@@ -22,7 +25,6 @@ module.exports = {
           // and the script will go onto the next step.
           //"event": "/http:\/\/\\S+:3210/",   
           "event": "/Running/",
-
           // "done": true will move to the next step while keeping the shell alive.
           // "kill": true will move to the next step after killing the shell.
           "done": true
@@ -55,13 +57,12 @@ module.exports = {
         url: "{{input.event[0]}}"
       }
     },
-//    Uncomment this step to enable local wifi sharing (access the app from devices on the same network)
-//    {
-//      method: "proxy.start",
-//      params: {
-//        uri: "{{local.url}}",
-//        name: "Local Sharing"
-//      }
-//    }
+    {
+      method: "proxy.start",
+      params: {
+        uri: "{{local.url}}",
+        name: "Local Sharing"
+      }
+    }
   ]
 }
