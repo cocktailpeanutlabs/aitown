@@ -37,7 +37,7 @@ module.exports = {
             icon: 'fa-solid fa-terminal',
             text: "Terminal",
             href: "start.js",
-          }].concat(db_exists ? db_menu : [])
+          }].concat((db_exists ? db_menu : []))
         } else {
           return [{
             icon: 'fa-solid fa-terminal',
@@ -62,7 +62,7 @@ module.exports = {
           icon: "fa-regular fa-circle-xmark",
           text: "Reset Project",
           href: "reset.js",
-        }]
+        }])
       }
     } else {
       return [{
