@@ -15,9 +15,7 @@ module.exports = {
         conda: "node18",
         path: "app",                // Edit this to customize the path to start the shell from
         message: [
-          "conda install -y -c conda-forge nodejs==18.19.0",
-          "conda install -y -c conda-forge just",
-          "node -v",
+          "conda install -y -c conda-forge nodejs==18.19.0 just",
           "npm install",
         ]
       }
@@ -36,13 +34,6 @@ module.exports = {
         path: "app"
       }
     },
-    //  Uncomment this step to add automatic venv deduplication (Experimental)
-    //  {
-    //    method: "fs.link",
-    //    params: {
-    //      venv: "app/env"
-    //    }
-    //  },
     {
       method: "notify",
       params: {
