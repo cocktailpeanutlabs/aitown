@@ -67,13 +67,6 @@ module.exports = {
         // the input.event is the regular expression match object from the previous step
         url: "{{input.event[0]}}"
       }
-    },
-    {
-      method: "proxy.start",
-      params: {
-        uri: "{{local.url}}",
-        name: "Local Sharing"
-      }
     }
   ]
 }
