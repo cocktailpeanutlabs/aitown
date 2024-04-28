@@ -44,7 +44,7 @@ module.exports = {
           text: "Reset DB",
           href: "explode.js",
         }, {
-          icon: 'fa-solid fa-database",
+          icon: "fa-solid fa-database",
           text: "Download World DB",
           href: "app/convex_local_backend.sqlite3",
           popout: true,
