@@ -27,13 +27,6 @@ module.exports = {
             text: "Terminal",
             href: "start.js",
           }, {
-            icon: 'fa-solid fa-bomb',
-            text: "Start Over",
-            href: "run.js",
-            params: {
-              cmd: "just convex run init"
-            }
-          }, {
             icon: 'fa-solid fa-gauge-simple-high',
             text: "Dashboard",
             href: "run.js",
@@ -62,6 +55,21 @@ module.exports = {
           icon: "fa-solid fa-plug",
           text: "Install",
           href: "install.js",
+        }, {
+          icon: 'fa-solid fa-bomb',
+          text: "Start the World Over",
+          href: "run.js",
+          params: {
+            cmd: "just convex run init"
+          }
+        }, {
+          icon: 'fa-solid fa-gauge-simple-high',
+          text: "Dashboard",
+          href: "run.js",
+          params: {
+            cmd: "npx -y convex dashboard",
+            daemon: true
+          }
         }, {
           icon: "fa-regular fa-circle-xmark",
           text: "Reset",
