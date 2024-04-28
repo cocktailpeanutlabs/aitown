@@ -46,7 +46,7 @@ module.exports = {
         }, {
           icon: 'fa-solid fa-database",
           text: "Download World DB",
-          href: "app/convex_local_backend.sqlite3"
+          href: "app/convex_local_backend.sqlite3",
           popout: true,
         }, {
           icon: "fa-solid fa-plug",
