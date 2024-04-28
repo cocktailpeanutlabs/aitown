@@ -8,6 +8,17 @@ module.exports = {
     let installing = await kernel.running(__dirname, "install.js")
     let installed = await kernel.exists(__dirname, "app", "node_modules")
     let running = await kernel.running(__dirname, "start.js")
+    let db_exists = await kernel.exists(__dirname, "app", "convex_local_backend.sqlite3")
+    let db_menu = [{
+      icon: 'fa-solid fa-bomb',
+      text: "Reset DB",
+      href: "explode.js",
+    }, {
+      icon: "fa-solid fa-database",
+      text: "Download DB",
+      href: "app/convex_local_backend.sqlite3?raw=true",
+      popout: true,
+    }]
     if (installing) {
       return [{
         icon: "fa-solid fa-plug",
@@ -26,7 +37,7 @@ module.exports = {
             icon: 'fa-solid fa-terminal',
             text: "Terminal",
             href: "start.js",
-          }]
+          }].concat(db_menu)
         } else {
           return [{
             icon: 'fa-solid fa-terminal',
@@ -39,16 +50,7 @@ module.exports = {
           icon: "fa-solid fa-power-off",
           text: "Start",
           href: "start.js",
-        }, {
-          icon: 'fa-solid fa-bomb',
-          text: "Reset DB",
-          href: "explode.js",
-        }, {
-          icon: "fa-solid fa-database",
-          text: "Download World DB",
-          href: "app/convex_local_backend.sqlite3",
-          popout: true,
-        }, {
+        }].concat(db_menu).concat([{
           icon: "fa-solid fa-plug",
           text: "Update",
           href: "update.js",
