@@ -52,7 +52,7 @@ module.exports = {
           text: "Start the World Over",
           href: "run.js",
           params: {
-            cmd: "just convex run init"
+            cmd: "just convex init"
           }
         }, {
           icon: "fa-regular fa-circle-xmark",
