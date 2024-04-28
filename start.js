@@ -45,6 +45,7 @@ module.exports = {
     {
       method: "shell.run",
       params: {
+        conda: "node18",
         message: "npm run dev",
         path: "app",
         on: [{
