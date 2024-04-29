@@ -29,11 +29,27 @@ module.exports = {
       }
     },
     {
+      when: "{{platform === 'darwin' && arch == 'arm64'}}",
+      method: "shell.run",
+      params: {
+        message: "unzip convex-local-backend-aarch64-apple-darwin.zip",
+        path: "app"
+      }
+    },
+    {
       when: "{{platform === 'darwin' && arch == 'x86'}}",
       method: "fs.download",
       params: {
         uri: "https://github.com/get-convex/convex-backend/releases/download/precompiled-2024-04-29-5b5828c/convex-local-backend-x86_64-apple-darwin.zip",
         dir: "app"
+      }
+    },
+    {
+      when: "{{platform === 'darwin' && arch == 'x86'}}",
+      method: "shell.run",
+      params: {
+        message: "unzip convex-local-backend-x86_64-apple-darwin.zip",
+        path: "app"
       }
     },
     {
@@ -45,9 +61,10 @@ module.exports = {
       }
     },
     {
+      when: "{{platform === 'linux' && arch == 'x86'}}",
       method: "shell.run",
       params: {
-        message: "unzip convex-local-backend-aarch64-apple-darwin.zip",
+        message: "unzip convex-local-backend-x86_64-unknown-linux-gnu.zip",
         path: "app"
       }
     },
