@@ -16,13 +16,14 @@ nav .flexible {
 }
 .container {
 }
-button {
+button, .btn {
   background: black;
   color: white;
   border: 2px solid rgba(255,255,255,0.5);
   padding: 5px 10px;
   border-radius: 2px;
   margin: 5px;
+  cursor: pointer;
 }
 .container img {
   height: 300px;
@@ -33,11 +34,15 @@ button#save {
   font-weight: bold;
   border: none;
 }
+#fileInput {
+  display: none;
+}
 
 </style>
 <link href="css/tabulator.min.css" rel='stylesheet'/>
 <script src="js/tabulator.min.js"></script>
 <script src="./pinokio.js"></script>
+<script src="./filesaver.min.js"></script>
 <script>
 const pinokio = new Pinokio({
   http: "http://localhost:42000",
@@ -98,6 +103,18 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     await fs.writeFile("characters.json", JSON.stringify(characters, null, 2))
     location.href = location.href
   })
+  document.querySelector("#export").addEventListener("click", async (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    let blob = new Blob([JSON.stringify(characters, null, 2)], { type: 'application/json' })
+    saveAs(blob, "world.json")
+  })
+  document.querySelector("#load").addEventListener("click", async (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    document.querySelector("#fileInput").click()
+
+  })
   document.querySelector("#remove").addEventListener("click", async (e) => {
     let selectedData = table.getSelectedData();
     let selectedRows = table.getSelectedRows();
@@ -107,6 +124,22 @@ document.addEventListener("DOMContentLoaded", async (e) => {
     }
     console.log("after", table.getData())
   })
+  document.querySelector("#fileInput").addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        try {
+          const characters = JSON.parse(reader.result);
+          table.replaceData(characters)
+          // Do something with the loaded JSON data
+        } catch (error) {
+          alert(error.toString())
+        }
+      };
+      reader.readAsText(file);
+    }
+  });
 })
 </script>
 </head>
@@ -115,7 +148,10 @@ document.addEventListener("DOMContentLoaded", async (e) => {
   <button id='add'>+ Add Item</button>
   <button id='remove'>- Remove Selected Items</button>
   <div class='flexible'></div>
+  <button id='export'>Download</button>
+  <button id='load'>Load</button>
   <button id='save'>Save</button>
+  <input type="file" id="fileInput" accept=".json" />
 </nav>
 <div class='container'></div>
 </body>
