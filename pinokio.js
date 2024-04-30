@@ -60,7 +60,8 @@ module.exports = {
           items = items.concat({
             icon: 'fa-solid fa-globe',
             text: 'World Editor UI',
-            href: local.manager + "?raw=true"
+            href: local.manager + "?raw=true",
+            popout: true
           })
         }
         items = items.concat((db_exists ? db_menu : []))
