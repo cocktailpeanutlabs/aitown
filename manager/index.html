@@ -1,0 +1,122 @@
+<html>
+<head>
+<style>
+body {
+  height: 100%;
+  font-family: sans-serif;
+  margin: 0;
+}
+nav {
+  padding:10px;
+  background: rgb(27, 28, 29);
+  display: flex;
+}
+nav .flexible {
+  flex-grow: 1;
+}
+.container {
+}
+button {
+  background: black;
+  color: white;
+  border: 2px solid rgba(255,255,255,0.5);
+  padding: 5px 10px;
+  border-radius: 2px;
+  margin: 5px;
+}
+.container img {
+  height: 300px;
+}
+button#save {
+  background: yellowgreen;
+  color: black;
+  font-weight: bold;
+  border: none;
+}
+
+</style>
+<link href="css/tabulator.min.css" rel='stylesheet'/>
+<script src="js/tabulator.min.js"></script>
+<script src="./pinokio.js"></script>
+<script>
+const pinokio = new Pinokio({
+  http: "http://localhost:42000",
+  ws: "ws://localhost:42000"
+});
+const fs = pinokio.fs("api", "https://github.com/cocktailpeanutlabs/aitown.git/app/data")
+const get = async () => {
+  let str = await fs.readFile("characters.json", "utf8")
+  let characters = JSON.parse(str)
+  return characters
+}
+const render = async (characters) => {
+  let columns = []
+  let keys = Object.keys(characters[0])
+  for(let key of keys) {
+    if (key === 'name') {
+      columns.push({
+        width: 100,
+        title: key,
+        field: key,
+        editor: 'input',
+      })
+    } else if (key === 'character') {
+      columns.push({
+        width: 100,
+        title: key,
+        field: key,
+        editor: 'input',
+      })
+    } else {
+      columns.push({
+        title: key,
+        field: key,
+        editor: 'input',
+      })
+    }
+  }
+  return new Tabulator(".container", {
+    columns,
+    data: characters,
+    reactiveData:true,
+    layout:"fitColumns",
+    selectableRows:true,
+    //autoColumns:true,
+  });
+}
+document.addEventListener("DOMContentLoaded", async (e) => {
+  let characters = await get()
+  let table = await render(characters)
+  document.querySelector("#add").addEventListener("click", (e) => {
+    let rand = Math.floor(Math.random() * 7) + 1
+    let character = "f" + rand
+    characters.push({name:"John", character, identity: "", plan: "" })
+  })
+  document.querySelector("#save").addEventListener("click", async (e) => {
+    characters = table.getData()
+    console.log("save", characters)
+    await fs.writeFile("characters.json", JSON.stringify(characters, null, 2))
+    location.href = location.href
+  })
+  document.querySelector("#remove").addEventListener("click", async (e) => {
+    let selectedData = table.getSelectedData();
+    let selectedRows = table.getSelectedRows();
+    for(let row of selectedRows) {
+      console.log(row.getElement())
+      row.delete()
+    }
+    console.log("after", table.getData())
+  })
+})
+</script>
+</head>
+<body>
+<nav>
+  <button id='add'>+ Add Item</button>
+  <button id='remove'>- Remove Selected Items</button>
+  <div class='flexible'></div>
+  <button id='save'>Save</button>
+</nav>
+<div class='container'></div>
+</body>
+</html>

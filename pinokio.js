@@ -46,11 +46,25 @@ module.exports = {
           }]
         }
       } else {
-        return [{
+        let items = [{
           icon: "fa-solid fa-power-off",
           text: "Start",
           href: "start.js",
-        }].concat((db_exists ? db_menu : [])).concat([{
+        }, {
+          icon: 'fa-regular fa-pen-to-square',
+          text: 'World Editor',
+          href: 'edit.js',
+        }]
+        let local = kernel.memory.local[path.resolve(__dirname, "edit.js")]
+        if (local && local.manager) {
+          items = items.concat({
+            icon: 'fa-solid fa-globe',
+            text: 'World Editor UI',
+            href: local.manager + "?raw=true"
+          })
+        }
+        items = items.concat((db_exists ? db_menu : []))
+        items = items.concat([{
           icon: "fa-solid fa-plug",
           text: "Update",
           href: "update.js",
@@ -63,6 +77,7 @@ module.exports = {
           text: "Reset Project",
           href: "reset.js",
         }])
+        return items
       }
     } else {
       return [{
