@@ -15,7 +15,7 @@ module.exports = {
       params: {
         path: "app",                // Edit this to customize the path to start the shell from
         message: [
-          "conda install -y -c conda-forge sh just",
+          "conda install -y -c conda-forge just",
         ]
       }
     },
