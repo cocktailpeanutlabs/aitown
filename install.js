@@ -5,17 +5,36 @@ module.exports = {
       method: "shell.run",
       params: {
         message: [
-          "git clone https://github.com/peanutcocktail/ai-town.git app",
+          //"git clone https://github.com/peanutcocktail/ai-town.git app",
+          "git clone https://github.com/betapeanut/ai-town.git app",
         ]
       }
     },
     {
       method: "shell.run",
       params: {
-        conda: "node18",
         path: "app",                // Edit this to customize the path to start the shell from
         message: [
-          "conda install -y -c conda-forge nodejs==18.19.0 just",
+          "conda install -y -c conda-forge sh just",
+        ]
+      }
+    },
+//    {
+//      method: "shell.run",
+//      params: {
+//        conda: "node18",
+//        path: "app",                // Edit this to customize the path to start the shell from
+//        message: [
+//          "conda install -y -c conda-forge nodejs==18.19.0 just",
+//          "npm install",
+//        ]
+//      }
+//    },
+//    {
+      method: "shell.run",
+      params: {
+        path: "app",                // Edit this to customize the path to start the shell from
+        message: [
           "npm install",
         ]
       }
@@ -65,6 +84,22 @@ module.exports = {
       method: "shell.run",
       params: {
         message: "unzip convex-local-backend-x86_64-unknown-linux-gnu.zip",
+        path: "app"
+      }
+    },
+    {
+      when: "{{platform === 'win32'}}",
+      method: "fs.download",
+      params: {
+        uri: "https://github.com/get-convex/convex-backend/releases/download/precompiled-2024-05-17-27156fb/convex-local-backend-x86_64-pc-windows-msvc.zip",
+        dir: "app"
+      }
+    },
+    {
+      when: "{{platform === 'win32'}}",
+      method: "shell.run",
+      params: {
+        message: "unzip convex-local-backend-x86_64-pc-windows-msvc.zip",
         path: "app"
       }
     },
