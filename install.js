@@ -30,7 +30,7 @@ module.exports = {
 //        ]
 //      }
 //    },
-//    {
+    {
       method: "shell.run",
       params: {
         path: "app",                // Edit this to customize the path to start the shell from
