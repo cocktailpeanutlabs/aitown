@@ -39,7 +39,7 @@ module.exports = {
           "{{platform === 'win32' ? 'convex-local-backend.exe' : './convex-local-backend'}}"
         ],
         on: [{
-          "event": "/.+/",
+          "event": "/local_backend|Running|listening/i",
           "done": true
         }]
       }
