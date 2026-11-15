@@ -1,9 +1,16 @@
 const path = require('path')
 module.exports = {
-  version: "1.5",
+  version: "8.0",
   title: "AITown",
   description: "Build and customize your own version of AI town - a virtual town where AI characters live, chat and socialize https://github.com/a16z-infra/ai-town",
   icon: "icon.png",
+  pre: [
+  {
+    icon: "ollama.png",
+    title: "Ollama",
+    description: "Get up and running with large language models.",
+    href: "https://ollama.com/"
+  }],
   menu: async (kernel) => {
     let installing = await kernel.running(__dirname, "install.js")
     let installed = await kernel.exists(__dirname, "app", "node_modules")
